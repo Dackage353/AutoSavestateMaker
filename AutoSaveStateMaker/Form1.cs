@@ -27,11 +27,11 @@ namespace AutoSaveStateMaker
             InitializeComponent();
 
             _inputHandler.SetUpJoystick();
-            _inputHandler.dPadUpAction = () => StopOrStart();
-            _inputHandler.dPadDownAction = () => LoadCurrent();
-            _inputHandler.dPadLeftAction = () => DecreaseSlot();
-            _inputHandler.dPadRightAction = () => IncreaseSlot();
-            _inputHandler.AAction = () => FocusWindow();
+            _inputHandler.DPadUpAction = () => StopOrStart();
+            _inputHandler.DPadDownAction = () => LoadCurrent();
+            _inputHandler.DPadLeftAction = () => DecreaseSlot();
+            _inputHandler.DPadRightAction = () => IncreaseSlot();
+            _inputHandler.FocusWithAAction = () => FocusWindow();
 
             _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
@@ -62,7 +62,7 @@ namespace AutoSaveStateMaker
                 Controls.Add(button);
             }
         }
-        
+
         private void FocusWindow()
         {
             if (run_CheckBox.Checked)
@@ -94,7 +94,7 @@ namespace AutoSaveStateMaker
 
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
         }
-        
+
         private void DecreaseSlot()
         {
             _currentSaveSlot--;
@@ -246,6 +246,16 @@ namespace AutoSaveStateMaker
         private void hotkeys_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _inputHandler.HotkeysOn = hotkeys_CheckBox.Checked;
+        }
+
+        private void focusGameWithA_CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _inputHandler.FocusGameWithA = focusGameWithA_CheckBox.Checked;
+        }
+
+        private void requireR_CheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            _inputHandler.RequireR = requireR_CheckBox.Checked;
         }
     }
 }

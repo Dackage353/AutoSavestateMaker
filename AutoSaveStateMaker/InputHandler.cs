@@ -23,11 +23,13 @@ namespace AutoSaveStateMaker
         public Action DPadDownAction { get; set; } = () => { };
         public Action DPadLeftAction { get; set; } = () => { };
         public Action DPadRightAction { get; set; } = () => { };
+        public Action FocusWithAAction { get; set; } = () => { };
 
         private ActiveButtons oldButtons, activeButtons = new();
 
         public bool HotkeysOn { get; set; } = false;
         public bool RequireR { get; set; } = false;
+        public bool FocusGameWithA { get; set; } = false;
 
         private readonly System.Windows.Forms.Timer _timer = new();
 
@@ -86,7 +88,9 @@ namespace AutoSaveStateMaker
                 var datas = joystick.GetBufferedData();
                 oldButtons = activeButtons;
 
+                if (FocusGameWithA && activeButtons.A && !oldButtons.A)
                 {
+                    FocusWithAAction();
                 }
 
                 bool rTest = !RequireR || activeButtons.R;
