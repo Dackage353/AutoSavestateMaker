@@ -33,6 +33,8 @@
             label1 = new Label();
             lastCreatedSlot_Label = new Label();
             settings_Panel = new Panel();
+            requireR_CheckBox = new CheckBox();
+            focusGameWithA_CheckBox = new CheckBox();
             hotkeys_CheckBox = new CheckBox();
             label6 = new Label();
             savestatesCountSet_Button = new Button();
@@ -88,25 +90,49 @@
             // settings_Panel
             // 
             settings_Panel.BorderStyle = BorderStyle.FixedSingle;
+            settings_Panel.Controls.Add(requireR_CheckBox);
+            settings_Panel.Controls.Add(focusGameWithA_CheckBox);
             settings_Panel.Controls.Add(hotkeys_CheckBox);
             settings_Panel.Controls.Add(label6);
             settings_Panel.Controls.Add(savestatesCountSet_Button);
             settings_Panel.Controls.Add(savestatesCount_NumericUpDown);
             settings_Panel.Controls.Add(label3);
             settings_Panel.Controls.Add(interval_NumericUpDown);
-            settings_Panel.Location = new Point(12, 31);
+            settings_Panel.Location = new Point(3, 31);
             settings_Panel.Name = "settings_Panel";
-            settings_Panel.Size = new Size(153, 162);
+            settings_Panel.Size = new Size(162, 226);
             settings_Panel.TabIndex = 5;
+            // 
+            // requireR_CheckBox
+            // 
+            requireR_CheckBox.AutoSize = true;
+            requireR_CheckBox.Location = new Point(6, 195);
+            requireR_CheckBox.Name = "requireR_CheckBox";
+            requireR_CheckBox.Size = new Size(76, 19);
+            requireR_CheckBox.TabIndex = 12;
+            requireR_CheckBox.Text = "Require R";
+            requireR_CheckBox.UseVisualStyleBackColor = true;
+            requireR_CheckBox.CheckedChanged += requireR_CheckBox_CheckedChanged;
+            // 
+            // focusGameWithA_CheckBox
+            // 
+            focusGameWithA_CheckBox.AutoSize = true;
+            focusGameWithA_CheckBox.Location = new Point(8, 123);
+            focusGameWithA_CheckBox.Name = "focusGameWithA_CheckBox";
+            focusGameWithA_CheckBox.Size = new Size(127, 19);
+            focusGameWithA_CheckBox.TabIndex = 8;
+            focusGameWithA_CheckBox.Text = "Focus game with A";
+            focusGameWithA_CheckBox.UseVisualStyleBackColor = true;
+            focusGameWithA_CheckBox.CheckedChanged += focusGameWithA_CheckBox_CheckedChanged;
             // 
             // hotkeys_CheckBox
             // 
             hotkeys_CheckBox.AutoSize = true;
-            hotkeys_CheckBox.Location = new Point(11, 122);
+            hotkeys_CheckBox.Location = new Point(7, 170);
             hotkeys_CheckBox.Name = "hotkeys_CheckBox";
-            hotkeys_CheckBox.Size = new Size(69, 19);
+            hotkeys_CheckBox.Size = new Size(100, 19);
             hotkeys_CheckBox.TabIndex = 11;
-            hotkeys_CheckBox.Text = "Hotkeys";
+            hotkeys_CheckBox.Text = "Dpad Hotkeys";
             hotkeys_CheckBox.UseVisualStyleBackColor = true;
             hotkeys_CheckBox.CheckedChanged += hotkeys_CheckBox_CheckedChanged;
             // 
@@ -218,5 +244,7 @@
         private Button savestatesCountSet_Button;
         private NumericUpDown savestatesCount_NumericUpDown;
         private CheckBox hotkeys_CheckBox;
+        private CheckBox focusGameWithA_CheckBox;
+        private CheckBox requireR_CheckBox;
     }
 }
