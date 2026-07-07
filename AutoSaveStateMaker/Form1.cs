@@ -31,7 +31,7 @@ namespace AutoSaveStateMaker
             _inputHandler.DPadDownAction = () => LoadCurrent();
             _inputHandler.DPadLeftAction = () => DecreaseSlot();
             _inputHandler.DPadRightAction = () => IncreaseSlot();
-            _inputHandler.FocusWithAAction = () => FocusWindow();
+            _inputHandler.FocusGameWithAAction = () => FocusWindow();
 
             _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
@@ -67,7 +67,6 @@ namespace AutoSaveStateMaker
         {
             if (run_CheckBox.Checked)
             {
-
                 Process process = Process.GetProcessesByName(_config.ProcessName).FirstOrDefault();
                 if (process != null)
                 {
