@@ -23,7 +23,7 @@ namespace AutoSaveStateMaker
         public Action DPadDownAction { get; set; } = () => { };
         public Action DPadLeftAction { get; set; } = () => { };
         public Action DPadRightAction { get; set; } = () => { };
-        public Action FocusWithAAction { get; set; } = () => { };
+        public Action FocusGameWithAAction { get; set; } = () => { };
 
         private ActiveButtons oldButtons, activeButtons = new();
 
@@ -88,9 +88,32 @@ namespace AutoSaveStateMaker
                 var datas = joystick.GetBufferedData();
                 oldButtons = activeButtons;
 
+                foreach (var state in datas)
+                {
+                    bool pressed = state.Value != 0;
+
+                    switch (state.Offset)
+                    {
+                        case JoystickOffset.Buttons0: activeButtons.A = pressed; break;
+                        case JoystickOffset.Buttons1: activeButtons.B = pressed; break;
+                        case JoystickOffset.Buttons2: activeButtons.Z = pressed; break;
+                        case JoystickOffset.Buttons3: activeButtons.Start = pressed; break;
+                        case JoystickOffset.Buttons4: activeButtons.L = pressed; break;
+                        case JoystickOffset.Buttons5: activeButtons.R = pressed; break;
+                        case JoystickOffset.Buttons6: activeButtons.CUp = pressed; break;
+                        case JoystickOffset.Buttons7: activeButtons.CDown = pressed; break;
+                        case JoystickOffset.Buttons8: activeButtons.CLeft = pressed; break;
+                        case JoystickOffset.Buttons9: activeButtons.CRight = pressed; break;
+                        case JoystickOffset.Buttons10: activeButtons.DPadUp = pressed; break;
+                        case JoystickOffset.Buttons11: activeButtons.DPadDown = pressed; break;
+                        case JoystickOffset.Buttons12: activeButtons.DPadLeft = pressed;  break;
+                        case JoystickOffset.Buttons13: activeButtons.DPadRight = pressed; break;
+                    }
+                }
+
                 if (FocusGameWithA && activeButtons.A && !oldButtons.A)
                 {
-                    FocusWithAAction();
+                    FocusGameWithAAction();
                 }
 
                 bool rTest = !RequireR || activeButtons.R;
