@@ -36,6 +36,7 @@ namespace AutoSavestateMaker
             _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
 
+            _maxSaveSlot = _config.DefaultSavestateCount;
             SetSavestateButtons();
         }
 
