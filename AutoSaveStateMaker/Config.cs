@@ -12,10 +12,10 @@ namespace AutoSavestateMaker
     {
         private const string ConfigFileName = "config.yaml";
 
-        public string SaveSavestateHotkey = "F5";
-        public string LoadSavestateHotkey = "F7";
-        public string ProcessName = "Project64";
-        public int DefaultSavestateCount = 20;
+        public string SaveSavestateHotkey { get; set; } = "F5";
+        public string LoadSavestateHotkey { get; set; } = "F7";
+        public string ProcessName { get; set; } = "Project64";
+        public int DefaultSavestateCount { get; set; } = 20;
 
         public static Config Load()
         {
