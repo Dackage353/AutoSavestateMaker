@@ -43,6 +43,8 @@
             status_PictureBox = new PictureBox();
             save_Button = new Button();
             load_Button = new Button();
+            slotLeft_Button = new Button();
+            slotRight_Button = new Button();
             ((System.ComponentModel.ISupportInitialize)interval_NumericUpDown).BeginInit();
             settings_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)savestatesCount_NumericUpDown).BeginInit();
@@ -204,11 +206,33 @@
             load_Button.UseVisualStyleBackColor = true;
             load_Button.Click += load_Button_Click;
             // 
+            // slotLeft_Button
+            // 
+            slotLeft_Button.Location = new Point(254, 10);
+            slotLeft_Button.Name = "slotLeft_Button";
+            slotLeft_Button.Size = new Size(30, 30);
+            slotLeft_Button.TabIndex = 8;
+            slotLeft_Button.Text = "<";
+            slotLeft_Button.UseVisualStyleBackColor = true;
+            slotLeft_Button.Click += slotLeft_Button_Click;
+            // 
+            // slotRight_Button
+            // 
+            slotRight_Button.Location = new Point(290, 10);
+            slotRight_Button.Name = "slotRight_Button";
+            slotRight_Button.Size = new Size(30, 30);
+            slotRight_Button.TabIndex = 8;
+            slotRight_Button.Text = ">";
+            slotRight_Button.UseVisualStyleBackColor = true;
+            slotRight_Button.Click += slotRight_Button_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(602, 343);
+            Controls.Add(slotRight_Button);
+            Controls.Add(slotLeft_Button);
             Controls.Add(load_Button);
             Controls.Add(save_Button);
             Controls.Add(status_PictureBox);
@@ -246,5 +270,7 @@
         private CheckBox hotkeys_CheckBox;
         private CheckBox focusGameWithA_CheckBox;
         private CheckBox requireR_CheckBox;
+        private Button slotLeft_Button;
+        private Button slotRight_Button;
     }
 }

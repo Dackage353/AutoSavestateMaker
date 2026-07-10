@@ -259,5 +259,15 @@ namespace AutoSavestateMaker
         {
             _inputHandler.RequireR = requireR_CheckBox.Checked;
         }
+
+        private void slotLeft_Button_Click(object sender, EventArgs e)
+        {
+            DecreaseSlot();
+        }
+
+        private void slotRight_Button_Click(object sender, EventArgs e)
+        {
+            IncreaseSlot();
+        }
     }
 }
