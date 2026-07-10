@@ -37,6 +37,7 @@ namespace AutoSavestateMaker
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
 
             _maxSaveSlot = _config.DefaultSavestateCount;
+            savestatesCount_NumericUpDown.Value = _config.DefaultSavestateCount;
             SetSavestateButtons();
         }
 
