@@ -108,7 +108,7 @@
             // requireR_CheckBox
             // 
             requireR_CheckBox.AutoSize = true;
-            requireR_CheckBox.Location = new Point(6, 195);
+            requireR_CheckBox.Location = new Point(31, 195);
             requireR_CheckBox.Name = "requireR_CheckBox";
             requireR_CheckBox.Size = new Size(76, 19);
             requireR_CheckBox.TabIndex = 12;
