@@ -1,4 +1,4 @@
-﻿namespace AutoSaveStateMaker
+﻿namespace AutoSavestateMaker
 {
     partial class Form1
     {

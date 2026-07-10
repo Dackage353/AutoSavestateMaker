@@ -1,4 +1,4 @@
-﻿namespace AutoSaveStateMaker
+﻿namespace AutoSavestateMaker
 {
     internal static class Helper
     {

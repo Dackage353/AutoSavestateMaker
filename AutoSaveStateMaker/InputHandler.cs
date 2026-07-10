@@ -3,7 +3,7 @@ using SharpDX.DirectInput;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace AutoSaveStateMaker
+namespace AutoSavestateMaker
 {
     internal class InputHandler
     {

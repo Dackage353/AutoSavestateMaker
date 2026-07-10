@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.ComponentModel;
 
-namespace AutoSaveStateMaker
+namespace AutoSavestateMaker
 {
     public partial class Form1 : Form
     {
