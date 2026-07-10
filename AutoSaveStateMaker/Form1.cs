@@ -14,7 +14,6 @@ namespace AutoSavestateMaker
 
         private const int offsetX = 185, offsetY = 90, buttonWidth = 35, buttonHeight = 25, horizontalPadding = 5, verticalPadding = 5;
 
-        private readonly Config _config = Config.Load();
         private readonly System.Windows.Forms.Timer _savestateTimer = new();
         private readonly InputHandler _inputHandler = new();
 
@@ -39,9 +38,9 @@ namespace AutoSavestateMaker
             _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
 
-            interval_NumericUpDown.Value = _config.DefaultInterval;
-            _maxSaveSlot = _config.DefaultSavestateCount;
-            savestatesCount_NumericUpDown.Value = _config.DefaultSavestateCount;
+            interval_NumericUpDown.Value = Config.Instance.DefaultInterval;
+            _maxSaveSlot = Config.Instance.DefaultSavestateCount;
+            savestatesCount_NumericUpDown.Value = Config.Instance.DefaultSavestateCount;
             SetSavestateButtons();
         }
 
@@ -73,7 +72,7 @@ namespace AutoSavestateMaker
         {
             if (run_CheckBox.Checked)
             {
-                Process process = Process.GetProcessesByName(_config.ProcessName).FirstOrDefault();
+                Process process = Process.GetProcessesByName(Config.Instance.ProcessName).FirstOrDefault();
                 if (process != null)
                 {
                     SetForegroundWindow(process.MainWindowHandle);
@@ -132,7 +131,7 @@ namespace AutoSavestateMaker
 
         private void SaveSavestate(bool incrementSlot, bool forceFocus)
         {
-            Process process = Process.GetProcessesByName(_config.ProcessName).FirstOrDefault();
+            Process process = Process.GetProcessesByName(Config.Instance.ProcessName).FirstOrDefault();
             if (process != null)
             {
                 if (forceFocus && process.MainWindowHandle != GetForegroundWindow())
@@ -149,7 +148,7 @@ namespace AutoSavestateMaker
                         if (_currentSaveSlot > _maxSaveSlot) _currentSaveSlot = 1;
                     }
 
-                    string hotkey = "{" + _config.SaveSavestateHotkey + "}";
+                    string hotkey = "{" + Config.Instance.SaveSavestateHotkey + "}";
 
                     SendKeys.Send(GetKeyWithModifier(_currentSaveSlot));
                     SendKeys.Send(hotkey);
@@ -161,7 +160,7 @@ namespace AutoSavestateMaker
 
         private void LoadSavestate(int slot)
         {
-            Process process = Process.GetProcessesByName(_config.ProcessName).FirstOrDefault();
+            Process process = Process.GetProcessesByName(Config.Instance.ProcessName).FirstOrDefault();
             if (process != null)
             {
                 if (GetForegroundWindow() != process.MainWindowHandle)
@@ -169,14 +168,14 @@ namespace AutoSavestateMaker
                     SetForegroundWindow(process.MainWindowHandle);
                 }
 
-                string hotkey = "{" + _config.LoadSavestateHotkey + "}";
+                string hotkey = "{" + Config.Instance.LoadSavestateHotkey + "}";
 
                 SendKeys.Send(GetKeyWithModifier(slot));
                 SendKeys.Send(hotkey);
             }
             else
             {
-                Helper.ShowError("Process \"" + _config.ProcessName + "\" not found");
+                Helper.ShowError("Process \"" + Config.Instance.ProcessName + "\" not found");
             }
         }
 
@@ -205,7 +204,7 @@ namespace AutoSavestateMaker
         {
             if (run_CheckBox.Checked)
             {
-                Process p = Process.GetProcessesByName(_config.ProcessName).FirstOrDefault();
+                Process p = Process.GetProcessesByName(Config.Instance.ProcessName).FirstOrDefault();
                 if (p != null)
                 {
                     Start();
@@ -213,7 +212,7 @@ namespace AutoSavestateMaker
                 else
                 {
                     run_CheckBox.Checked = false;
-                    Helper.ShowError("Process \"" + _config.ProcessName + "\" not found");
+                    Helper.ShowError("Process \"" + Config.Instance.ProcessName + "\" not found");
                 }
             }
             else
