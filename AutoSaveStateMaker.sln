@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
 VisualStudioVersion = 18.7.11903.348
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSavestateMaker", "AutoSaveStateMaker\AutoSavestateMaker.csproj", "{2F42EBB1-6C56-405B-ABDF-F33672C07CB2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoSavestateMaker", "AutoSavestateMaker\AutoSavestateMaker.csproj", "{2F42EBB1-6C56-405B-ABDF-F33672C07CB2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
