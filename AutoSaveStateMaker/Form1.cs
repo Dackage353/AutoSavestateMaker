@@ -26,7 +26,10 @@ namespace AutoSavestateMaker
         {
             InitializeComponent();
 
-            _inputHandler.SetUpJoystick();
+            _inputHandler.RefreshControllers();
+            controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
+
+
             _inputHandler.DPadUpAction = () => StopOrStart();
             _inputHandler.DPadDownAction = () => LoadCurrent();
             _inputHandler.DPadLeftAction = () => DecreaseSlot();
@@ -268,6 +271,22 @@ namespace AutoSavestateMaker
         private void slotRight_Button_Click(object sender, EventArgs e)
         {
             IncreaseSlot();
+        }
+
+        private void refreshControllerList_Button_Click(object sender, EventArgs e)
+        {
+            _inputHandler.RefreshControllers();
+            controllerList_ComboBox.Items.Clear();
+            controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
+        }
+
+        private void controllerList_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (controllerList_ComboBox.Text != string.Empty)
+            {
+                _inputHandler.SelectedController = _inputHandler.Controllers.FirstOrDefault(x => x.InstanceName == controllerList_ComboBox.Text);
+                _inputHandler.SetUpJoystick();
+            }
         }
     }
 }

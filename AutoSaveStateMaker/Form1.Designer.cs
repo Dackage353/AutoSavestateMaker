@@ -40,6 +40,8 @@
             savestatesCountSet_Button = new Button();
             savestatesCount_NumericUpDown = new NumericUpDown();
             label3 = new Label();
+            refreshControllerList_Button = new Button();
+            controllerList_ComboBox = new ComboBox();
             status_PictureBox = new PictureBox();
             save_Button = new Button();
             load_Button = new Button();
@@ -102,7 +104,7 @@
             settings_Panel.Controls.Add(interval_NumericUpDown);
             settings_Panel.Location = new Point(3, 31);
             settings_Panel.Name = "settings_Panel";
-            settings_Panel.Size = new Size(162, 226);
+            settings_Panel.Size = new Size(147, 230);
             settings_Panel.TabIndex = 5;
             // 
             // requireR_CheckBox
@@ -177,6 +179,25 @@
             label3.TabIndex = 6;
             label3.Text = "Interval (seconds)";
             // 
+            // refreshControllerList_Button
+            // 
+            refreshControllerList_Button.Location = new Point(82, 296);
+            refreshControllerList_Button.Name = "refreshControllerList_Button";
+            refreshControllerList_Button.Size = new Size(68, 23);
+            refreshControllerList_Button.TabIndex = 14;
+            refreshControllerList_Button.Text = "Refresh";
+            refreshControllerList_Button.UseVisualStyleBackColor = true;
+            refreshControllerList_Button.Click += refreshControllerList_Button_Click;
+            // 
+            // controllerList_ComboBox
+            // 
+            controllerList_ComboBox.FormattingEnabled = true;
+            controllerList_ComboBox.Location = new Point(3, 267);
+            controllerList_ComboBox.Name = "controllerList_ComboBox";
+            controllerList_ComboBox.Size = new Size(147, 23);
+            controllerList_ComboBox.TabIndex = 13;
+            controllerList_ComboBox.SelectedIndexChanged += controllerList_ComboBox_SelectedIndexChanged;
+            // 
             // status_PictureBox
             // 
             status_PictureBox.BackColor = Color.Tomato;
@@ -231,7 +252,9 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(602, 343);
+            Controls.Add(refreshControllerList_Button);
             Controls.Add(slotRight_Button);
+            Controls.Add(controllerList_ComboBox);
             Controls.Add(slotLeft_Button);
             Controls.Add(load_Button);
             Controls.Add(save_Button);
@@ -272,5 +295,7 @@
         private CheckBox requireR_CheckBox;
         private Button slotLeft_Button;
         private Button slotRight_Button;
+        private Button refreshControllerList_Button;
+        private ComboBox controllerList_ComboBox;
     }
 }
