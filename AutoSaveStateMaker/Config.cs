@@ -16,6 +16,7 @@ namespace AutoSavestateMaker
         public string LoadSavestateHotkey { get; set; } = "F7";
         public string ProcessName { get; set; } = "Project64";
         public int DefaultSavestateCount { get; set; } = 20;
+        public int DefaultInterval { get; set; } = 5;
 
         public static Config Load()
         {
