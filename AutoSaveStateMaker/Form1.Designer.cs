@@ -76,14 +76,14 @@
             label1.AutoSize = true;
             label1.Location = new Point(182, 14);
             label1.Name = "label1";
-            label1.Size = new Size(28, 15);
+            label1.Size = new Size(27, 15);
             label1.TabIndex = 2;
-            label1.Text = "Last";
+            label1.Text = "Slot";
             // 
             // lastCreatedSlot_Label
             // 
             lastCreatedSlot_Label.AutoSize = true;
-            lastCreatedSlot_Label.Location = new Point(216, 14);
+            lastCreatedSlot_Label.Location = new Point(207, 14);
             lastCreatedSlot_Label.Name = "lastCreatedSlot_Label";
             lastCreatedSlot_Label.Size = new Size(41, 15);
             lastCreatedSlot_Label.TabIndex = 2;
@@ -180,9 +180,9 @@
             // status_PictureBox
             // 
             status_PictureBox.BackColor = Color.Tomato;
-            status_PictureBox.Location = new Point(326, 12);
+            status_PictureBox.Location = new Point(533, 10);
             status_PictureBox.Name = "status_PictureBox";
-            status_PictureBox.Size = new Size(48, 48);
+            status_PictureBox.Size = new Size(60, 60);
             status_PictureBox.TabIndex = 6;
             status_PictureBox.TabStop = false;
             // 
