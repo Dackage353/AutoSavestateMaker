@@ -7,7 +7,7 @@ namespace AutoSavestateMaker
 {
     internal class InputHandler
     {
-        public Joystick joystick;
+        private const int ButtonOffset = 48;
 
         public Action AAction { get; set; } = () => { };
         public Action BAction { get; set; } = () => { };
@@ -31,45 +31,44 @@ namespace AutoSavestateMaker
         public bool RequireR { get; set; } = false;
         public bool FocusGameWithA { get; set; } = false;
 
-        private readonly System.Windows.Forms.Timer _timer = new();
+        public List<DeviceInstance> Controllers { get; set; } = [];
+        public DeviceInstance SelectedController { get; set; } = null;
 
-        public void SetUpJoystick()
+        private System.Windows.Forms.Timer _timer = new();
+        private DirectInput _directInput = new DirectInput();
+        private Joystick _joystick = null;
+
+
+        public InputHandler()
         {
             _timer.Interval = 6;
             _timer.Tick += ProcessJoystick;
             _timer.Start();
+        }
+
+        public void RefreshControllers()
+        {
+            try
+            {
+                Controllers.Clear();
+                Controllers.AddRange(_directInput.GetDevices(DeviceType.Gamepad, DeviceEnumerationFlags.AllDevices));
+                Controllers.AddRange(_directInput.GetDevices(DeviceType.Joystick, DeviceEnumerationFlags.AllDevices));
+            }
+            catch (SharpDXException)
+            {
+                Debug.WriteLine("sharpdx exception");
+            }
+        }
+
+        public void SetUpJoystick()
+        {
+            if (SelectedController == null) return;
 
             try
             {
-                var directInput = new DirectInput();
-                var joystickGuid = Guid.Empty;
-
-                foreach (var deviceInstance in directInput.GetDevices(DeviceType.Gamepad,
-                            DeviceEnumerationFlags.AllDevices))
-                {
-                    joystickGuid = deviceInstance.InstanceGuid;
-                }
-
-                if (joystickGuid == Guid.Empty)
-                {
-                    foreach (var deviceInstance in directInput.GetDevices(DeviceType.Joystick,
-                            DeviceEnumerationFlags.AllDevices))
-                    {
-                        joystickGuid = deviceInstance.InstanceGuid;
-                    }
-                }
-
-                if (joystickGuid == Guid.Empty)
-                {
-                    MessageBox.Show("No joystick/Gamepad found.");
-                }
-                else
-                {
-                    joystick = new Joystick(directInput, joystickGuid);
-
-                    joystick.Properties.BufferSize = 128;
-                    joystick.Acquire();
-                }
+                _joystick = new Joystick(_directInput, SelectedController.InstanceGuid);
+                _joystick.Properties.BufferSize = 128;
+                _joystick.Acquire();
 
             }
             catch (SharpDXException)
@@ -80,35 +79,33 @@ namespace AutoSavestateMaker
 
         public void ProcessJoystick(object sender, EventArgs e)
         {
-            if (joystick == null) return;
+            if (_joystick == null) return;
 
             try
             {
-                joystick.Poll();
-                var datas = joystick.GetBufferedData();
+                _joystick.Poll();
+                var datas = _joystick.GetBufferedData();
                 oldButtons = activeButtons;
 
                 foreach (var state in datas)
                 {
                     bool pressed = state.Value != 0;
 
-                    switch (state.Offset)
-                    {
-                        case JoystickOffset.Buttons0: activeButtons.A = pressed; break;
-                        case JoystickOffset.Buttons1: activeButtons.B = pressed; break;
-                        case JoystickOffset.Buttons2: activeButtons.Z = pressed; break;
-                        case JoystickOffset.Buttons3: activeButtons.Start = pressed; break;
-                        case JoystickOffset.Buttons4: activeButtons.L = pressed; break;
-                        case JoystickOffset.Buttons5: activeButtons.R = pressed; break;
-                        case JoystickOffset.Buttons6: activeButtons.CUp = pressed; break;
-                        case JoystickOffset.Buttons7: activeButtons.CDown = pressed; break;
-                        case JoystickOffset.Buttons8: activeButtons.CLeft = pressed; break;
-                        case JoystickOffset.Buttons9: activeButtons.CRight = pressed; break;
-                        case JoystickOffset.Buttons10: activeButtons.DPadUp = pressed; break;
-                        case JoystickOffset.Buttons11: activeButtons.DPadDown = pressed; break;
-                        case JoystickOffset.Buttons12: activeButtons.DPadLeft = pressed;  break;
-                        case JoystickOffset.Buttons13: activeButtons.DPadRight = pressed; break;
-                    }
+                    int button = (int)state.Offset - ButtonOffset;
+                    if (button == Config.Instance.AButtonID) activeButtons.A = pressed;
+                    if (button == Config.Instance.BButtonID) activeButtons.B = pressed;
+                    if (button == Config.Instance.ZButtonID) activeButtons.Z = pressed;
+                    if (button == Config.Instance.StartButtonID) activeButtons.Start = pressed;
+                    if (button == Config.Instance.LButtonID) activeButtons.L = pressed;
+                    if (button == Config.Instance.RButtonID) activeButtons.R = pressed;
+                    if (button == Config.Instance.CUpButtonID) activeButtons.CUp = pressed;
+                    if (button == Config.Instance.CDownButtonID) activeButtons.CDown = pressed;
+                    if (button == Config.Instance.CLeftButtonID) activeButtons.CLeft = pressed;
+                    if (button == Config.Instance.CRightButtonID) activeButtons.CRight = pressed;
+                    if (button == Config.Instance.DPadUpButtonID) activeButtons.DPadUp = pressed;
+                    if (button == Config.Instance.DPadDownButtonID) activeButtons.DPadDown = pressed;
+                    if (button == Config.Instance.DPadLeftButtonID) activeButtons.DPadLeft = pressed;
+                    if (button == Config.Instance.DPadRightButtonID) activeButtons.DPadRight = pressed;
                 }
 
                 if (FocusGameWithA && activeButtons.A && !oldButtons.A)
