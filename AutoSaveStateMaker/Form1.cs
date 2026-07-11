@@ -20,6 +20,7 @@ namespace AutoSavestateMaker
         private int _currentSaveSlot = 1, _maxSaveSlot = 20;
 
         private List<Button> _savestateButtons = [];
+        private ButtonTestDialog _testDialog = null;
 
         public Form1()
         {
@@ -285,6 +286,23 @@ namespace AutoSavestateMaker
             {
                 _inputHandler.SelectedController = _inputHandler.Controllers.FirstOrDefault(x => x.InstanceName == controllerList_ComboBox.Text);
                 _inputHandler.SetUpJoystick();
+            }
+        }
+
+        private void buttonTest_Button_Click(object sender, EventArgs e)
+        {
+            if (controllerList_ComboBox.Text != string.Empty)
+            {
+                if (_testDialog == null || _testDialog.IsDisposed)
+                {
+                    _testDialog = new ButtonTestDialog(_inputHandler);
+                }
+
+                _testDialog.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No controller selected.");
             }
         }
     }

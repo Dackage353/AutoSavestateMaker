@@ -47,6 +47,7 @@
             load_Button = new Button();
             slotLeft_Button = new Button();
             slotRight_Button = new Button();
+            buttonTest_Button = new Button();
             ((System.ComponentModel.ISupportInitialize)interval_NumericUpDown).BeginInit();
             settings_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)savestatesCount_NumericUpDown).BeginInit();
@@ -247,11 +248,22 @@
             slotRight_Button.UseVisualStyleBackColor = true;
             slotRight_Button.Click += slotRight_Button_Click;
             // 
+            // buttonTest_Button
+            // 
+            buttonTest_Button.Location = new Point(3, 296);
+            buttonTest_Button.Name = "buttonTest_Button";
+            buttonTest_Button.Size = new Size(39, 23);
+            buttonTest_Button.TabIndex = 15;
+            buttonTest_Button.Text = "Test";
+            buttonTest_Button.UseVisualStyleBackColor = true;
+            buttonTest_Button.Click += buttonTest_Button_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(602, 343);
+            Controls.Add(buttonTest_Button);
             Controls.Add(refreshControllerList_Button);
             Controls.Add(slotRight_Button);
             Controls.Add(controllerList_ComboBox);
@@ -297,5 +309,6 @@
         private Button slotRight_Button;
         private Button refreshControllerList_Button;
         private ComboBox controllerList_ComboBox;
+        private Button buttonTest_Button;
     }
 }
