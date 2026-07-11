@@ -33,7 +33,7 @@
             label1 = new Label();
             lastCreatedSlot_Label = new Label();
             settings_Panel = new Panel();
-            requireR_CheckBox = new CheckBox();
+            requireShift_CheckBox = new CheckBox();
             focusGameWithA_CheckBox = new CheckBox();
             hotkeys_CheckBox = new CheckBox();
             label6 = new Label();
@@ -95,7 +95,7 @@
             // settings_Panel
             // 
             settings_Panel.BorderStyle = BorderStyle.FixedSingle;
-            settings_Panel.Controls.Add(requireR_CheckBox);
+            settings_Panel.Controls.Add(requireShift_CheckBox);
             settings_Panel.Controls.Add(focusGameWithA_CheckBox);
             settings_Panel.Controls.Add(hotkeys_CheckBox);
             settings_Panel.Controls.Add(label6);
@@ -108,16 +108,16 @@
             settings_Panel.Size = new Size(147, 230);
             settings_Panel.TabIndex = 5;
             // 
-            // requireR_CheckBox
+            // requireShift_CheckBox
             // 
-            requireR_CheckBox.AutoSize = true;
-            requireR_CheckBox.Location = new Point(31, 195);
-            requireR_CheckBox.Name = "requireR_CheckBox";
-            requireR_CheckBox.Size = new Size(76, 19);
-            requireR_CheckBox.TabIndex = 12;
-            requireR_CheckBox.Text = "Require R";
-            requireR_CheckBox.UseVisualStyleBackColor = true;
-            requireR_CheckBox.CheckedChanged += requireR_CheckBox_CheckedChanged;
+            requireShift_CheckBox.AutoSize = true;
+            requireShift_CheckBox.Location = new Point(31, 195);
+            requireShift_CheckBox.Name = "requireShift_CheckBox";
+            requireShift_CheckBox.Size = new Size(92, 19);
+            requireShift_CheckBox.TabIndex = 12;
+            requireShift_CheckBox.Text = "Require shift";
+            requireShift_CheckBox.UseVisualStyleBackColor = true;
+            requireShift_CheckBox.CheckedChanged += requireShift_CheckBox_CheckedChanged;
             // 
             // focusGameWithA_CheckBox
             // 
@@ -135,9 +135,9 @@
             hotkeys_CheckBox.AutoSize = true;
             hotkeys_CheckBox.Location = new Point(7, 170);
             hotkeys_CheckBox.Name = "hotkeys_CheckBox";
-            hotkeys_CheckBox.Size = new Size(100, 19);
+            hotkeys_CheckBox.Size = new Size(69, 19);
             hotkeys_CheckBox.TabIndex = 11;
-            hotkeys_CheckBox.Text = "Dpad Hotkeys";
+            hotkeys_CheckBox.Text = "Hotkeys";
             hotkeys_CheckBox.UseVisualStyleBackColor = true;
             hotkeys_CheckBox.CheckedChanged += hotkeys_CheckBox_CheckedChanged;
             // 
@@ -304,7 +304,7 @@
         private NumericUpDown savestatesCount_NumericUpDown;
         private CheckBox hotkeys_CheckBox;
         private CheckBox focusGameWithA_CheckBox;
-        private CheckBox requireR_CheckBox;
+        private CheckBox requireShift_CheckBox;
         private Button slotLeft_Button;
         private Button slotRight_Button;
         private Button refreshControllerList_Button;

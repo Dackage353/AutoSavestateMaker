@@ -257,9 +257,9 @@ namespace AutoSavestateMaker
             _inputHandler.FocusGame = focusGameWithA_CheckBox.Checked;
         }
 
-        private void requireR_CheckBox_CheckedChanged(object sender, EventArgs e)
+        private void requireShift_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.RequireShiftKey = requireR_CheckBox.Checked;
+            _inputHandler.RequireShift = requireShift_CheckBox.Checked;
         }
 
         private void slotLeft_Button_Click(object sender, EventArgs e)

@@ -17,7 +17,7 @@ namespace AutoSavestateMaker
         private ActiveButtons oldButtons, activeButtons = new();
 
         public bool HotkeysOn { get; set; } = false;
-        public bool RequireShiftKey { get; set; } = false;
+        public bool RequireShift { get; set; } = false;
         public bool FocusGame { get; set; } = false;
 
         public List<DeviceInstance> Controllers { get; set; } = [];
@@ -115,8 +115,8 @@ namespace AutoSavestateMaker
                     FocusGameAction();
                 }
 
-                bool shiftKeyTest = !RequireShiftKey || activeButtons.ShiftKey;
-                if (HotkeysOn && shiftKeyTest)
+                bool shiftTest = !RequireShift || activeButtons.Shift;
+                if (HotkeysOn && shiftTest)
                 {
                     if (activeButtons.StartStop && !oldButtons.StartStop) StartStopButtonAction();
                     if (activeButtons.LoadSavestate && !oldButtons.LoadSavestate) LoadSavestateButtonAction();
@@ -132,7 +132,7 @@ namespace AutoSavestateMaker
 
         struct ActiveButtons
         {
-            public bool FocusGame, StartStop, LoadSavestate, SlotLeft, SlotRight, ShiftKey;
+            public bool FocusGame, StartStop, LoadSavestate, SlotLeft, SlotRight, Shift;
         }
     }
 }
