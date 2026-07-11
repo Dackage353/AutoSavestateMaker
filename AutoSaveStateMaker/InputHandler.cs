@@ -5,44 +5,35 @@ using System.Runtime.InteropServices;
 
 namespace AutoSavestateMaker
 {
-    internal class InputHandler
+    public class InputHandler
     {
-        private const int ButtonOffset = 48;
-
-        public Action AAction { get; set; } = () => { };
-        public Action BAction { get; set; } = () => { };
-        public Action ZAction { get; set; } = () => { };
-        public Action StartAction { get; set; } = () => { };
-        public Action LAction { get; set; } = () => { };
-        public Action RAction { get; set; } = () => { };
-        public Action CUpAction { get; set; } = () => { };
-        public Action CDownAction { get; set; } = () => { };
-        public Action CLeftAction { get; set; } = () => { };
-        public Action CRightAction { get; set; } = () => { };
-        public Action DPadUpAction { get; set; } = () => { };
-        public Action DPadDownAction { get; set; } = () => { };
-        public Action DPadLeftAction { get; set; } = () => { };
-        public Action DPadRightAction { get; set; } = () => { };
-        public Action FocusGameWithAAction { get; set; } = () => { };
+        public Action StartStopButtonAction { get; set; } = () => { };
+        public Action LoadSavestateButtonAction { get; set; } = () => { };
+        public Action SlotLeftButtonAction { get; set; } = () => { };
+        public Action SlotRightButtonAction { get; set; } = () => { };
+        public Action FocusGameAction { get; set; } = () => { };
+        public Action OnTick { get; set; } = () => { };
 
         private ActiveButtons oldButtons, activeButtons = new();
 
         public bool HotkeysOn { get; set; } = false;
-        public bool RequireR { get; set; } = false;
-        public bool FocusGameWithA { get; set; } = false;
+        public bool RequireShiftKey { get; set; } = false;
+        public bool FocusGame { get; set; } = false;
 
         public List<DeviceInstance> Controllers { get; set; } = [];
         public DeviceInstance SelectedController { get; set; } = null;
 
         private System.Windows.Forms.Timer _timer = new();
-        private DirectInput _directInput = new DirectInput();
+        private DirectInput _directInput = new();
         private Joystick _joystick = null;
+
+        public int LastButtonPressed { get; set; } = -1;
 
 
         public InputHandler()
         {
             _timer.Interval = 6;
-            _timer.Tick += ProcessJoystick;
+            _timer.Tick += Tick;
             _timer.Start();
         }
 
@@ -57,6 +48,17 @@ namespace AutoSavestateMaker
             catch (SharpDXException)
             {
                 Debug.WriteLine("sharpdx exception");
+            }
+        }
+
+        public void ClearController()
+        {
+            SelectedController = null;
+
+            if (_joystick != null)
+            {
+                _joystick.Dispose();
+                _joystick = null;
             }
         }
 
@@ -77,7 +79,14 @@ namespace AutoSavestateMaker
             }
         }
 
-        public void ProcessJoystick(object sender, EventArgs e)
+        public void Tick(object sender, EventArgs e)
+        {
+            ProcessJoystick();
+            OnTick();
+        }
+
+
+        public void ProcessJoystick()
         {
             if (_joystick == null) return;
 
@@ -91,45 +100,28 @@ namespace AutoSavestateMaker
                 {
                     bool pressed = state.Value != 0;
 
-                    int button = (int)state.Offset - ButtonOffset;
-                    if (button == Config.Instance.AButtonID) activeButtons.A = pressed;
-                    if (button == Config.Instance.BButtonID) activeButtons.B = pressed;
-                    if (button == Config.Instance.ZButtonID) activeButtons.Z = pressed;
-                    if (button == Config.Instance.StartButtonID) activeButtons.Start = pressed;
-                    if (button == Config.Instance.LButtonID) activeButtons.L = pressed;
-                    if (button == Config.Instance.RButtonID) activeButtons.R = pressed;
-                    if (button == Config.Instance.CUpButtonID) activeButtons.CUp = pressed;
-                    if (button == Config.Instance.CDownButtonID) activeButtons.CDown = pressed;
-                    if (button == Config.Instance.CLeftButtonID) activeButtons.CLeft = pressed;
-                    if (button == Config.Instance.CRightButtonID) activeButtons.CRight = pressed;
-                    if (button == Config.Instance.DPadUpButtonID) activeButtons.DPadUp = pressed;
-                    if (button == Config.Instance.DPadDownButtonID) activeButtons.DPadDown = pressed;
-                    if (button == Config.Instance.DPadLeftButtonID) activeButtons.DPadLeft = pressed;
-                    if (button == Config.Instance.DPadRightButtonID) activeButtons.DPadRight = pressed;
+                    int button = (int)state.Offset;
+                    if (button == Config.Instance.FocusGameButtonID) activeButtons.FocusGame = pressed;
+                    if (button == Config.Instance.StartStopButtonID) activeButtons.StartStop = pressed;
+                    if (button == Config.Instance.LoadSavestateButtonID) activeButtons.LoadSavestate = pressed;
+                    if (button == Config.Instance.SlotLeftButtonID) activeButtons.SlotLeft = pressed;
+                    if (button == Config.Instance.SlotRightButtonID) activeButtons.SlotRight = pressed;
+
+                    if (pressed) LastButtonPressed = button;
                 }
 
-                if (FocusGameWithA && activeButtons.A && !oldButtons.A)
+                if (FocusGame && activeButtons.FocusGame && !oldButtons.FocusGame)
                 {
-                    FocusGameWithAAction();
+                    FocusGameAction();
                 }
 
-                bool rTest = !RequireR || activeButtons.R;
-                if (HotkeysOn && rTest)
+                bool shiftKeyTest = !RequireShiftKey || activeButtons.ShiftKey;
+                if (HotkeysOn && shiftKeyTest)
                 {
-                    if (activeButtons.A && !oldButtons.A) AAction();
-                    if (activeButtons.B && !oldButtons.B) BAction();
-                    if (activeButtons.Z && !oldButtons.Z) ZAction();
-                    if (activeButtons.Start && !oldButtons.Start) StartAction();
-                    if (activeButtons.L && !oldButtons.L) LAction();
-                    if (activeButtons.R && !oldButtons.R) RAction();
-                    if (activeButtons.CUp && !oldButtons.CUp) CUpAction();
-                    if (activeButtons.CDown && !oldButtons.CDown) CDownAction();
-                    if (activeButtons.CLeft && !oldButtons.CLeft) CLeftAction();
-                    if (activeButtons.CRight && !oldButtons.CRight) CRightAction();
-                    if (activeButtons.DPadUp && !oldButtons.DPadUp) DPadUpAction();
-                    if (activeButtons.DPadDown && !oldButtons.DPadDown) DPadDownAction();
-                    if (activeButtons.DPadLeft && !oldButtons.DPadLeft) DPadLeftAction();
-                    if (activeButtons.DPadRight && !oldButtons.DPadRight) DPadRightAction();
+                    if (activeButtons.StartStop && !oldButtons.StartStop) StartStopButtonAction();
+                    if (activeButtons.LoadSavestate && !oldButtons.LoadSavestate) LoadSavestateButtonAction();
+                    if (activeButtons.SlotLeft && !oldButtons.SlotLeft) SlotLeftButtonAction();
+                    if (activeButtons.SlotRight && !oldButtons.SlotRight) SlotRightButtonAction();
                 }
             }
             catch (SharpDXException)
@@ -140,7 +132,7 @@ namespace AutoSavestateMaker
 
         struct ActiveButtons
         {
-            public bool A, B, Z, Start, L, R, CUp, CDown, CLeft, CRight, DPadUp, DPadDown, DPadLeft, DPadRight;
+            public bool FocusGame, StartStop, LoadSavestate, SlotLeft, SlotRight, ShiftKey;
         }
     }
 }

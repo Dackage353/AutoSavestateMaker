@@ -29,12 +29,11 @@ namespace AutoSavestateMaker
             _inputHandler.RefreshControllers();
             controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
 
-
-            _inputHandler.DPadUpAction = () => StopOrStart();
-            _inputHandler.DPadDownAction = () => LoadCurrent();
-            _inputHandler.DPadLeftAction = () => DecreaseSlot();
-            _inputHandler.DPadRightAction = () => IncreaseSlot();
-            _inputHandler.FocusGameWithAAction = () => FocusWindow();
+            _inputHandler.StartStopButtonAction = () => StopOrStart();
+            _inputHandler.LoadSavestateButtonAction = () => LoadCurrent();
+            _inputHandler.SlotLeftButtonAction = () => DecreaseSlot();
+            _inputHandler.SlotRightButtonAction = () => IncreaseSlot();
+            _inputHandler.FocusGameAction = () => FocusWindow();
 
             _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
@@ -255,12 +254,12 @@ namespace AutoSavestateMaker
 
         private void focusGameWithA_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.FocusGameWithA = focusGameWithA_CheckBox.Checked;
+            _inputHandler.FocusGame = focusGameWithA_CheckBox.Checked;
         }
 
         private void requireR_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.RequireR = requireR_CheckBox.Checked;
+            _inputHandler.RequireShiftKey = requireR_CheckBox.Checked;
         }
 
         private void slotLeft_Button_Click(object sender, EventArgs e)
@@ -275,6 +274,9 @@ namespace AutoSavestateMaker
 
         private void refreshControllerList_Button_Click(object sender, EventArgs e)
         {
+            controllerList_ComboBox.Text = string.Empty;
+            _inputHandler.ClearController();
+
             _inputHandler.RefreshControllers();
             controllerList_ComboBox.Items.Clear();
             controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
