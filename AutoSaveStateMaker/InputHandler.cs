@@ -106,6 +106,7 @@ namespace AutoSavestateMaker
                     if (button == Config.Instance.LoadSavestateButtonID) activeButtons.LoadSavestate = pressed;
                     if (button == Config.Instance.SlotLeftButtonID) activeButtons.SlotLeft = pressed;
                     if (button == Config.Instance.SlotRightButtonID) activeButtons.SlotRight = pressed;
+                    if (button == Config.Instance.ShiftButtonID) activeButtons.Shift = pressed;
 
                     if (pressed) LastButtonPressed = button;
                 }

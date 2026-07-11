@@ -46,7 +46,7 @@ namespace AutoSavestateMaker
         public int DefaultInterval { get; set; } = 5;
 
         public int FocusGameButtonID { get; set; } = 48;
-        public int ShiftKeyButtonID { get; set; } = 53;
+        public int ShiftButtonID { get; set; } = 53;
         public int StartStopButtonID { get; set; } = 58;
         public int LoadSavestateButtonID { get; set; } = 59;
         public int SlotLeftButtonID { get; set; } = 60;
