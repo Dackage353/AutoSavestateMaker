@@ -322,7 +322,7 @@ namespace AutoSavestateMaker
             }
         }
 
-        private void buttonTest_Button_Click(object sender, EventArgs e)
+        private void editController_Button_Click(object sender, EventArgs e)
         {
             if (controllerList_ComboBox.Text != string.Empty)
             {

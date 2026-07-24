@@ -33,21 +33,21 @@
             label1 = new Label();
             lastCreatedSlot_Label = new Label();
             settings_Panel = new Panel();
+            editController_Button = new Button();
             requireShift_CheckBox = new CheckBox();
+            refreshControllerList_Button = new Button();
             focusGameWithA_CheckBox = new CheckBox();
             hotkeys_CheckBox = new CheckBox();
+            controllerList_ComboBox = new ComboBox();
             label6 = new Label();
             savestatesCountSet_Button = new Button();
             savestatesCount_NumericUpDown = new NumericUpDown();
             label3 = new Label();
-            refreshControllerList_Button = new Button();
-            controllerList_ComboBox = new ComboBox();
             status_PictureBox = new PictureBox();
             save_Button = new Button();
             load_Button = new Button();
             slotLeft_Button = new Button();
             slotRight_Button = new Button();
-            buttonTest_Button = new Button();
             ((System.ComponentModel.ISupportInitialize)interval_NumericUpDown).BeginInit();
             settings_Panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)savestatesCount_NumericUpDown).BeginInit();
@@ -95,7 +95,7 @@
             // settings_Panel
             // 
             settings_Panel.BorderStyle = BorderStyle.FixedSingle;
-            settings_Panel.Controls.Add(buttonTest_Button);
+            settings_Panel.Controls.Add(editController_Button);
             settings_Panel.Controls.Add(requireShift_CheckBox);
             settings_Panel.Controls.Add(refreshControllerList_Button);
             settings_Panel.Controls.Add(focusGameWithA_CheckBox);
@@ -111,6 +111,16 @@
             settings_Panel.Size = new Size(154, 255);
             settings_Panel.TabIndex = 5;
             // 
+            // editController_Button
+            // 
+            editController_Button.Location = new Point(3, 227);
+            editController_Button.Name = "editController_Button";
+            editController_Button.Size = new Size(39, 23);
+            editController_Button.TabIndex = 15;
+            editController_Button.Text = "Edit";
+            editController_Button.UseVisualStyleBackColor = true;
+            editController_Button.Click += editController_Button_Click;
+            // 
             // requireShift_CheckBox
             // 
             requireShift_CheckBox.AutoSize = true;
@@ -121,6 +131,16 @@
             requireShift_CheckBox.Text = "Require shift";
             requireShift_CheckBox.UseVisualStyleBackColor = true;
             requireShift_CheckBox.CheckedChanged += requireShift_CheckBox_CheckedChanged;
+            // 
+            // refreshControllerList_Button
+            // 
+            refreshControllerList_Button.Location = new Point(81, 227);
+            refreshControllerList_Button.Name = "refreshControllerList_Button";
+            refreshControllerList_Button.Size = new Size(68, 23);
+            refreshControllerList_Button.TabIndex = 14;
+            refreshControllerList_Button.Text = "Refresh";
+            refreshControllerList_Button.UseVisualStyleBackColor = true;
+            refreshControllerList_Button.Click += refreshControllerList_Button_Click;
             // 
             // focusGameWithA_CheckBox
             // 
@@ -143,6 +163,15 @@
             hotkeys_CheckBox.Text = "Hotkeys";
             hotkeys_CheckBox.UseVisualStyleBackColor = true;
             hotkeys_CheckBox.CheckedChanged += hotkeys_CheckBox_CheckedChanged;
+            // 
+            // controllerList_ComboBox
+            // 
+            controllerList_ComboBox.FormattingEnabled = true;
+            controllerList_ComboBox.Location = new Point(3, 198);
+            controllerList_ComboBox.Name = "controllerList_ComboBox";
+            controllerList_ComboBox.Size = new Size(146, 23);
+            controllerList_ComboBox.TabIndex = 13;
+            controllerList_ComboBox.SelectedIndexChanged += controllerList_ComboBox_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -182,25 +211,6 @@
             label3.Size = new Size(100, 15);
             label3.TabIndex = 6;
             label3.Text = "Interval (seconds)";
-            // 
-            // refreshControllerList_Button
-            // 
-            refreshControllerList_Button.Location = new Point(81, 227);
-            refreshControllerList_Button.Name = "refreshControllerList_Button";
-            refreshControllerList_Button.Size = new Size(68, 23);
-            refreshControllerList_Button.TabIndex = 14;
-            refreshControllerList_Button.Text = "Refresh";
-            refreshControllerList_Button.UseVisualStyleBackColor = true;
-            refreshControllerList_Button.Click += refreshControllerList_Button_Click;
-            // 
-            // controllerList_ComboBox
-            // 
-            controllerList_ComboBox.FormattingEnabled = true;
-            controllerList_ComboBox.Location = new Point(3, 198);
-            controllerList_ComboBox.Name = "controllerList_ComboBox";
-            controllerList_ComboBox.Size = new Size(146, 23);
-            controllerList_ComboBox.TabIndex = 13;
-            controllerList_ComboBox.SelectedIndexChanged += controllerList_ComboBox_SelectedIndexChanged;
             // 
             // status_PictureBox
             // 
@@ -251,16 +261,6 @@
             slotRight_Button.UseVisualStyleBackColor = true;
             slotRight_Button.Click += slotRight_Button_Click;
             // 
-            // buttonTest_Button
-            // 
-            buttonTest_Button.Location = new Point(3, 227);
-            buttonTest_Button.Name = "buttonTest_Button";
-            buttonTest_Button.Size = new Size(39, 23);
-            buttonTest_Button.TabIndex = 15;
-            buttonTest_Button.Text = "Test";
-            buttonTest_Button.UseVisualStyleBackColor = true;
-            buttonTest_Button.Click += buttonTest_Button_Click;
-            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -309,6 +309,6 @@
         private Button slotRight_Button;
         private Button refreshControllerList_Button;
         private ComboBox controllerList_ComboBox;
-        private Button buttonTest_Button;
+        private Button editController_Button;
     }
 }
