@@ -95,9 +95,12 @@
             // settings_Panel
             // 
             settings_Panel.BorderStyle = BorderStyle.FixedSingle;
+            settings_Panel.Controls.Add(buttonTest_Button);
             settings_Panel.Controls.Add(requireShift_CheckBox);
+            settings_Panel.Controls.Add(refreshControllerList_Button);
             settings_Panel.Controls.Add(focusGameWithA_CheckBox);
             settings_Panel.Controls.Add(hotkeys_CheckBox);
+            settings_Panel.Controls.Add(controllerList_ComboBox);
             settings_Panel.Controls.Add(label6);
             settings_Panel.Controls.Add(savestatesCountSet_Button);
             settings_Panel.Controls.Add(savestatesCount_NumericUpDown);
@@ -105,13 +108,13 @@
             settings_Panel.Controls.Add(interval_NumericUpDown);
             settings_Panel.Location = new Point(3, 31);
             settings_Panel.Name = "settings_Panel";
-            settings_Panel.Size = new Size(147, 230);
+            settings_Panel.Size = new Size(154, 255);
             settings_Panel.TabIndex = 5;
             // 
             // requireShift_CheckBox
             // 
             requireShift_CheckBox.AutoSize = true;
-            requireShift_CheckBox.Location = new Point(31, 195);
+            requireShift_CheckBox.Location = new Point(31, 173);
             requireShift_CheckBox.Name = "requireShift_CheckBox";
             requireShift_CheckBox.Size = new Size(92, 19);
             requireShift_CheckBox.TabIndex = 12;
@@ -133,7 +136,7 @@
             // hotkeys_CheckBox
             // 
             hotkeys_CheckBox.AutoSize = true;
-            hotkeys_CheckBox.Location = new Point(7, 170);
+            hotkeys_CheckBox.Location = new Point(7, 148);
             hotkeys_CheckBox.Name = "hotkeys_CheckBox";
             hotkeys_CheckBox.Size = new Size(69, 19);
             hotkeys_CheckBox.TabIndex = 11;
@@ -182,7 +185,7 @@
             // 
             // refreshControllerList_Button
             // 
-            refreshControllerList_Button.Location = new Point(82, 296);
+            refreshControllerList_Button.Location = new Point(81, 227);
             refreshControllerList_Button.Name = "refreshControllerList_Button";
             refreshControllerList_Button.Size = new Size(68, 23);
             refreshControllerList_Button.TabIndex = 14;
@@ -193,9 +196,9 @@
             // controllerList_ComboBox
             // 
             controllerList_ComboBox.FormattingEnabled = true;
-            controllerList_ComboBox.Location = new Point(3, 267);
+            controllerList_ComboBox.Location = new Point(3, 198);
             controllerList_ComboBox.Name = "controllerList_ComboBox";
-            controllerList_ComboBox.Size = new Size(147, 23);
+            controllerList_ComboBox.Size = new Size(146, 23);
             controllerList_ComboBox.TabIndex = 13;
             controllerList_ComboBox.SelectedIndexChanged += controllerList_ComboBox_SelectedIndexChanged;
             // 
@@ -250,7 +253,7 @@
             // 
             // buttonTest_Button
             // 
-            buttonTest_Button.Location = new Point(3, 296);
+            buttonTest_Button.Location = new Point(3, 227);
             buttonTest_Button.Name = "buttonTest_Button";
             buttonTest_Button.Size = new Size(39, 23);
             buttonTest_Button.TabIndex = 15;
@@ -262,11 +265,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(602, 343);
-            Controls.Add(buttonTest_Button);
-            Controls.Add(refreshControllerList_Button);
+            ClientSize = new Size(602, 344);
             Controls.Add(slotRight_Button);
-            Controls.Add(controllerList_ComboBox);
             Controls.Add(slotLeft_Button);
             Controls.Add(load_Button);
             Controls.Add(save_Button);

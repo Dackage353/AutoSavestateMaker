@@ -6,11 +6,13 @@
     <Nullable>disable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SharpDX.DirectInput" Version="4.2.0" />
+    <PackageReference Include="ppy.SDL3-CS" Version="2026.629.0" />
     <PackageReference Include="YamlDotNet" Version="18.1.0" />
+    
   </ItemGroup>
 
 </Project>

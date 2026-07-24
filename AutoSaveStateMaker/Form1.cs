@@ -1,6 +1,6 @@
+using AutoSavestateMaker.Input;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.ComponentModel;
 
 namespace AutoSavestateMaker
 {
@@ -17,17 +17,24 @@ namespace AutoSavestateMaker
         private readonly System.Windows.Forms.Timer _savestateTimer = new();
         private readonly InputHandler _inputHandler = new();
 
-        private int _currentSaveSlot = 1, _maxSaveSlot = 20;
+        private readonly Color RunningColor = Color.LightGreen,
+            StoppedColor = Color.Tomato,
+            RunningAndLoadedColor = Color.PaleGreen;
+
+
+        private DateTime _lastSavestate = DateTime.MinValue;
+        private int _currentSaveSlot = 1, _maxSaveSlot = 20, _extraWaitTime = 0;
+        private bool _isNewSavedSlot = false;
 
         private List<Button> _savestateButtons = [];
-        private ButtonTestDialog _testDialog = null;
+        private InputEditDialog _testDialog = null;
 
         public Form1()
         {
             InitializeComponent();
 
             _inputHandler.RefreshControllers();
-            controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
+            controllerList_ComboBox.Items.AddRange(_inputHandler.GetJoystickNames());
 
             _inputHandler.StartStopButtonAction = () => StopOrStart();
             _inputHandler.LoadSavestateButtonAction = () => LoadCurrent();
@@ -35,12 +42,23 @@ namespace AutoSavestateMaker
             _inputHandler.SlotRightButtonAction = () => IncreaseSlot();
             _inputHandler.FocusGameAction = () => FocusWindow();
 
-            _savestateTimer.Tick += (sender, e) => SaveSavestate(true, false);
+            _savestateTimer.Tick += (sender, e) =>
+            {
+                var timePassed = (DateTime.Now - _lastSavestate).TotalSeconds;
+                var waitTime = (int)interval_NumericUpDown.Value + _extraWaitTime;
+
+                if (timePassed >= waitTime)
+                {
+                    SaveSavestate(true, false);
+                }
+            };
+
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
 
-            interval_NumericUpDown.Value = Config.Instance.DefaultInterval;
-            _maxSaveSlot = Config.Instance.DefaultSavestateCount;
-            savestatesCount_NumericUpDown.Value = Config.Instance.DefaultSavestateCount;
+            interval_NumericUpDown.Value = Config.Instance.Interval;
+            _maxSaveSlot = Config.Instance.SavestateSlotCount;
+            savestatesCount_NumericUpDown.Value = Config.Instance.SavestateSlotCount;
+
             SetSavestateButtons();
         }
 
@@ -87,24 +105,33 @@ namespace AutoSavestateMaker
 
         private void LoadCurrent()
         {
+            var timePassed = (DateTime.Now - _lastSavestate).TotalSeconds;
+
+            if (_isNewSavedSlot && timePassed < Config.Instance.RewindAtLeastBySeconds)
+            {
+                DecreaseSlot();
+            }
+
+            status_PictureBox.BackColor = RunningAndLoadedColor;
             LoadSavestate(_currentSaveSlot);
+            _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
         }
 
         private void IncreaseSlot()
         {
             _currentSaveSlot++;
-
             if (_currentSaveSlot > _maxSaveSlot) _currentSaveSlot = 1;
 
+            _isNewSavedSlot = false;
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
         }
 
         private void DecreaseSlot()
         {
             _currentSaveSlot--;
-
             if (_currentSaveSlot < 1) _currentSaveSlot = _maxSaveSlot;
 
+            _isNewSavedSlot = false;
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
         }
 
@@ -112,11 +139,11 @@ namespace AutoSavestateMaker
         {
             run_CheckBox.Checked = true;
             settings_Panel.Enabled = false;
-            status_PictureBox.BackColor = Color.PaleGreen;
+            status_PictureBox.BackColor = RunningColor;
 
             SaveSavestate(true, true);
 
-            _savestateTimer.Interval = 1000 * (int)interval_NumericUpDown.Value;
+            _savestateTimer.Interval = 6;
             _savestateTimer.Start();
         }
 
@@ -124,7 +151,7 @@ namespace AutoSavestateMaker
         {
             run_CheckBox.Checked = false;
             settings_Panel.Enabled = true;
-            status_PictureBox.BackColor = Color.Tomato;
+            status_PictureBox.BackColor = StoppedColor;
 
             _savestateTimer.Stop();
         }
@@ -144,6 +171,7 @@ namespace AutoSavestateMaker
                     if (incrementSlot)
                     {
                         _currentSaveSlot++;
+                        _isNewSavedSlot = true;
 
                         if (_currentSaveSlot > _maxSaveSlot) _currentSaveSlot = 1;
                     }
@@ -153,6 +181,10 @@ namespace AutoSavestateMaker
                     SendKeys.Send(GetKeyWithModifier(_currentSaveSlot));
                     SendKeys.Send(hotkey);
 
+                    _lastSavestate = DateTime.Now;
+                    _extraWaitTime = 0;
+
+                    if (status_PictureBox.BackColor == Color.LightGreen) status_PictureBox.BackColor = Color.PaleGreen;
                     lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
                 }
             }
@@ -236,7 +268,7 @@ namespace AutoSavestateMaker
 
         private void load_Button_Click(object sender, EventArgs e)
         {
-            LoadSavestate(_currentSaveSlot);
+            LoadCurrent();
         }
 
         private void savestatesCountSet_Button_Click(object sender, EventArgs e)
@@ -275,19 +307,18 @@ namespace AutoSavestateMaker
         private void refreshControllerList_Button_Click(object sender, EventArgs e)
         {
             controllerList_ComboBox.Text = string.Empty;
-            _inputHandler.ClearController();
+            _inputHandler.SelectedJoystick = null;
 
             _inputHandler.RefreshControllers();
             controllerList_ComboBox.Items.Clear();
-            controllerList_ComboBox.Items.AddRange(_inputHandler.Controllers.Select(x => x.InstanceName).ToArray());
+            controllerList_ComboBox.Items.AddRange(_inputHandler.GetJoystickNames());
         }
 
         private void controllerList_ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (controllerList_ComboBox.Text != string.Empty)
             {
-                _inputHandler.SelectedController = _inputHandler.Controllers.FirstOrDefault(x => x.InstanceName == controllerList_ComboBox.Text);
-                _inputHandler.SetUpJoystick();
+                _inputHandler.SelectedJoystick = _inputHandler.Joysticks[controllerList_ComboBox.SelectedIndex];
             }
         }
 
@@ -295,11 +326,7 @@ namespace AutoSavestateMaker
         {
             if (controllerList_ComboBox.Text != string.Empty)
             {
-                if (_testDialog == null || _testDialog.IsDisposed)
-                {
-                    _testDialog = new ButtonTestDialog(_inputHandler);
-                }
-
+                _testDialog = new InputEditDialog(_inputHandler);
                 _testDialog.ShowDialog();
             }
             else
