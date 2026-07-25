@@ -33,7 +33,7 @@ The program makes savestates every few seconds to make long, failable challenges
 ----------
 ### Options
 - Interval: how many seconds before creating the next savestate.
-- Savestates: the number of savestate slots. Luna supports up to 80 with the default hotkeys.
+- Savestates: the number of savestate slots. Up to 80 are supported.
 - Focus game with A: this option pulls back focus to Project64 when you start playing again. (This is highly recommended since savestates will only be made while the game is focused)
 - Hotkeys: this turns on hotkey usage for your controller. See the edit screen for the list. Note that "focus game with A" works without this setting on.
 - Require shift: hotkeys will now require a shift hotkey to function. Pick the shift hotkey in the "edit" menu.
