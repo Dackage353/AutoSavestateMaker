@@ -55,10 +55,13 @@ namespace AutoSavestateMaker
 
             lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
 
-            interval_NumericUpDown.Value = Config.Instance.Interval;
-            _maxSaveSlot = Config.Instance.SavestateSlotCount;
+            interval_NumericUpDown.Value = Config.Instance.IntervalSeconds;
             savestatesCount_NumericUpDown.Value = Config.Instance.SavestateSlotCount;
+            focusGameWithA_CheckBox.Checked = Config.Instance.FocusGameWithA;
+            hotkeys_CheckBox.Checked = Config.Instance.HotkeysOn;
+            requireShift_CheckBox.Checked = Config.Instance.RequireShift;
 
+            _maxSaveSlot = Config.Instance.SavestateSlotCount;
             SetSavestateButtons();
         }
 
@@ -275,8 +278,17 @@ namespace AutoSavestateMaker
             LoadCurrent();
         }
 
+        private void interval_NumericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            Config.Instance.IntervalSeconds = (int)interval_NumericUpDown.Value;
+            Config.SaveInstance();
+        }
+
         private void savestatesCountSet_Button_Click(object sender, EventArgs e)
         {
+            Config.Instance.SavestateSlotCount = (int)savestatesCount_NumericUpDown.Value;
+            Config.SaveInstance();
+
             _maxSaveSlot = (int)savestatesCount_NumericUpDown.Value;
             if (_currentSaveSlot > _maxSaveSlot) _currentSaveSlot = 1;
 
@@ -285,17 +297,20 @@ namespace AutoSavestateMaker
 
         private void hotkeys_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.HotkeysOn = hotkeys_CheckBox.Checked;
+            Config.Instance.HotkeysOn = hotkeys_CheckBox.Checked;
+            Config.SaveInstance();
         }
 
         private void focusGameWithA_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.FocusGame = focusGameWithA_CheckBox.Checked;
+            Config.Instance.FocusGameWithA = focusGameWithA_CheckBox.Checked;
+            Config.SaveInstance();
         }
 
         private void requireShift_CheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            _inputHandler.RequireShift = requireShift_CheckBox.Checked;
+            Config.Instance.RequireShift = requireShift_CheckBox.Checked;
+            Config.SaveInstance();
         }
 
         private void slotLeft_Button_Click(object sender, EventArgs e)

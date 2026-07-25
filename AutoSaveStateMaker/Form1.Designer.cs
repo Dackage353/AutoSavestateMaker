@@ -62,6 +62,7 @@
             interval_NumericUpDown.Size = new Size(62, 23);
             interval_NumericUpDown.TabIndex = 0;
             interval_NumericUpDown.Value = new decimal(new int[] { 5, 0, 0, 0 });
+            interval_NumericUpDown.ValueChanged += interval_NumericUpDown_ValueChanged;
             // 
             // run_CheckBox
             // 
