@@ -47,15 +47,44 @@ namespace AutoSavestateMaker
         public string SaveSavestateHotkey { get; set; } = "F5";
         public string LoadSavestateHotkey { get; set; } = "F7";
         public string ProcessName { get; set; } = "Project64";
-        public int SavestateSlotCount { get; set; } = 20;
-        public int IntervalSeconds { get; set; } = 5;
+        public int SavestateSlotCount
+        {
+            get;
+            set
+            {
+                field = value < 5 ? 5 : value;
+            }
+        } = 20;
+
+        public int IntervalSeconds
+        {
+            get;
+            set
+            {
+                field = value < 1 ? 1 : value;
+            }
+        } = 5;
 
         public bool FocusGameWithA { get; set; } = true;
         public bool HotkeysOn { get; set; } = false;
         public bool RequireShift { get; set; } = false;
 
-        public int RewindAtLeastBySeconds { get; set; } = 3;
-        public int ExtraPauseSecondsOnLoad { get; set; } = 5;
+        public int RewindAtLeastBySeconds
+        {
+            get;
+            set
+            {
+                field = value < 0 ? 0 : value;
+            }
+        } = 3;
+        public int ExtraPauseSecondsOnLoad
+        {
+            get;
+            set
+            {
+                field = value < 0 ? 0: value;
+            }
+        } = 5;
 
         public InputInfo FocusGameInput { get; set; } = new InputInfo(InputType.Button, 0);
         public InputInfo ShiftInput { get; set; } = new InputInfo(InputType.Button, 4);

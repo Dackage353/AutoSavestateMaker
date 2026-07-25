@@ -198,7 +198,7 @@
             savestatesCount_NumericUpDown.Increment = new decimal(new int[] { 5, 0, 0, 0 });
             savestatesCount_NumericUpDown.Location = new Point(11, 83);
             savestatesCount_NumericUpDown.Maximum = new decimal(new int[] { 80, 0, 0, 0 });
-            savestatesCount_NumericUpDown.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
+            savestatesCount_NumericUpDown.Minimum = new decimal(new int[] { 5, 0, 0, 0 });
             savestatesCount_NumericUpDown.Name = "savestatesCount_NumericUpDown";
             savestatesCount_NumericUpDown.Size = new Size(56, 23);
             savestatesCount_NumericUpDown.TabIndex = 8;
