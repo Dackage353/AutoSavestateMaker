@@ -34,9 +34,9 @@ The program makes savestates every few seconds to make long, failable challenges
 - Interval: How often savestates are made in seconds.
 - Savestates: The number of savestate slots. Up to 80 are supported.
 - Focus game with A: Pulls back focus to Project64 when A is pressed. (This is highly recommended since savestates will only be made while the game is focused)
-- HotkeysOn: Hotkeys will be enabled for your controller. See the "Edit" menu for the list. (Note that "Focus game with A" works without this setting on.)
+- Hotkeys: Toggle controller hotkeys. See the "Edit" menu for the list. (Note that "Focus game with A" works without this setting on.)
 - Require shift: Hotkeys will now require a shift hotkey to function. Pick the shift hotkey in the "Edit" menu.
 
 #### Hidden config Options
 - "rewindAtLeastBySeconds": this handles whether to rewind by an extra slot. Sometimes a savestate is created a moment before you die, so this helps rewind to a point where you are more likely to be safe. Some low value of 2-4 is recommended.
-- "extraPauseSecondsOnLoad": this delays the next interval when you load a savestate. If you need to repeatedly load to get safety, this helps prevent the interval from creating another savestate before you are safe.
+- "extraPauseSecondsOnLoad": this delays the next interval when you load a savestate. If you are repeatedly loading savestates to get safety, this helps prevent the interval from creating another savestate too soon.
