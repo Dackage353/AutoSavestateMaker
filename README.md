@@ -14,12 +14,17 @@ The program makes savestates every few seconds to make long, failable challenges
 ----------
 ### Usage
 - Pick your options, then hit run at the top-left.
-- *Important* Savestates will only be made when Project64 is focused. This is so that you can easily do other things while the program is running. The "focus game with A" option helps make this easy to manage.
+- (*Important*) Savestates will only be made when Project64 is focused. This is so that you can easily do other things while the program is running. The "focus game with A" option helps make this easy to manage.
+- Use the left and right arrows to change the current save slot.
+- Use "load" or the numbered buttons to load savestates.
+- Use "save" to manually create a savestate. (Probably most useful when the program isn't running.)
 
 ----------
 ### Setup
 - To prevent the constant "making-a-savestate stutters", it's important to turn off the "Automaticaly compress saved states" option in Luna. This will however make savestates take up 8MB each instead of more like 1MB. (Shoutouts to Shin3 for this idea <3)
+
 ![Compressed Savestates](readme_images/luna-compressed-savestates.png)
+
 - Then simply open the .exe file.
 - A config file will be created after running the .exe for the first time. There you can edit the default values and some hidden settings. Make sure to restart the program if you manually edit the config.
 - At the bottom-left, pick your controller then pick "edit" to set your hotkeys. These are optional, and you can leave the controller blank to not use them.
