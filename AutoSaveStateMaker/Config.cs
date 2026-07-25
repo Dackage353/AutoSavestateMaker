@@ -48,15 +48,20 @@ namespace AutoSavestateMaker
         public string LoadSavestateHotkey { get; set; } = "F7";
         public string ProcessName { get; set; } = "Project64";
         public int SavestateSlotCount { get; set; } = 20;
-        public int Interval { get; set; } = 5;
-        public int RewindAtLeastBySeconds { get; set; } = 2;
+        public int IntervalSeconds { get; set; } = 5;
+
+        public bool FocusGameWithA { get; set; } = true;
+        public bool HotkeysOn { get; set; } = false;
+        public bool RequireShift { get; set; } = false;
+
+        public int RewindAtLeastBySeconds { get; set; } = 3;
         public int ExtraPauseSecondsOnLoad { get; set; } = 5;
 
-        public InputInfo FocusGame { get; set; } = new InputInfo(InputType.Button, 0);
-        public InputInfo Shift { get; set; } = new InputInfo(InputType.Button, 4);
-        public InputInfo StartStop { get; set; } = new InputInfo(InputType.DPad, 1);
-        public InputInfo LoadSavestate { get; set; } = new InputInfo(InputType.DPad, 8);
-        public InputInfo SlotLeft { get; set; } = new InputInfo(InputType.DPad, 2);
-        public InputInfo SlotRight { get; set; } = new InputInfo(InputType.DPad, 4);
+        public InputInfo FocusGameInput { get; set; } = new InputInfo(InputType.Button, 0);
+        public InputInfo ShiftInput { get; set; } = new InputInfo(InputType.Button, 4);
+        public InputInfo StartStopInput { get; set; } = new InputInfo(InputType.DPad, 1);
+        public InputInfo LoadSavestateInput { get; set; } = new InputInfo(InputType.DPad, 8);
+        public InputInfo SlotLeftInput { get; set; } = new InputInfo(InputType.DPad, 2);
+        public InputInfo SlotRightInput { get; set; } = new InputInfo(InputType.DPad, 4);
     }
 }
