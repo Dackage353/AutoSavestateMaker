@@ -11,10 +11,6 @@ namespace AutoSavestateMaker.Input
         public Action FocusGameAction { get; set; } = () => { };
         public Action OnTick { get; set; } = () => { };
 
-        public bool HotkeysOn { get; set; } = false;
-        public bool RequireShift { get; set; } = false;
-        public bool FocusGame { get; set; } = false;
-
         public bool InEditMode { get; set; } = false;
 
         private System.Windows.Forms.Timer _timer = new();
@@ -83,18 +79,18 @@ namespace AutoSavestateMaker.Input
 
                 if (!InEditMode)
                 {
-                    if (FocusGame && TestForPress(Config.Instance.FocusGame))
+                    if (Config.Instance.FocusGameWithA && TestForPress(Config.Instance.FocusGameInput))
                     {
                         FocusGameAction();
                     }
 
-                    bool shiftTest = !RequireShift || TestForActive(Config.Instance.Shift);
-                    if (HotkeysOn && shiftTest)
+                    bool shiftTest = !Config.Instance.RequireShift || TestForActive(Config.Instance.ShiftInput);
+                    if (Config.Instance.HotkeysOn && shiftTest)
                     {
-                        if (TestForPress(Config.Instance.StartStop)) StartStopButtonAction();
-                        if (TestForPress(Config.Instance.LoadSavestate)) LoadSavestateButtonAction();
-                        if (TestForPress(Config.Instance.SlotLeft)) SlotLeftButtonAction();
-                        if (TestForPress(Config.Instance.SlotRight)) SlotRightButtonAction();
+                        if (TestForPress(Config.Instance.StartStopInput)) StartStopButtonAction();
+                        if (TestForPress(Config.Instance.LoadSavestateInput)) LoadSavestateButtonAction();
+                        if (TestForPress(Config.Instance.SlotLeftInput)) SlotLeftButtonAction();
+                        if (TestForPress(Config.Instance.SlotRightInput)) SlotRightButtonAction();
                     }
                 }
             }
