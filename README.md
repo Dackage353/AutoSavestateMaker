@@ -1,6 +1,6 @@
 # AutoSavestateMaker
 
-After much frustration from having to restart long segments I'm trying to practice, I had the idea for a program to create savestates for me. After finally developing it enough, I'm ready to share it.
+After being constantly frustrated by having to restart long segments I was practicing, I had the idea for a program that would create savestates for me. Now that I've finally developed it enough, I'm ready to share it.
 
 The program makes savestates every few seconds to make long, failable challenges easier to practice. It works by sending the savestate hotkey to Project64 every few seconds, picking a new savestate slot every time. This has proven to be quite convenient in practicing long kaizo stars, and it's especially perfect for IronMario practice runs.
 
