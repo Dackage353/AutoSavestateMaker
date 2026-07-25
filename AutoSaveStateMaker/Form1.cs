@@ -19,7 +19,7 @@ namespace AutoSavestateMaker
 
         private readonly Color RunningColor = Color.LightGreen,
             StoppedColor = Color.Tomato,
-            RunningAndLoadedColor = Color.PaleGreen;
+            RunningAndLoadedColor = Color.Yellow;
 
 
         private DateTime _lastSavestate = DateTime.MinValue;
@@ -112,7 +112,11 @@ namespace AutoSavestateMaker
                 DecreaseSlot();
             }
 
-            status_PictureBox.BackColor = RunningAndLoadedColor;
+            if (run_CheckBox.Checked)
+            {
+                status_PictureBox.BackColor = RunningAndLoadedColor;
+            }
+
             LoadSavestate(_currentSaveSlot);
             _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
         }
@@ -184,7 +188,7 @@ namespace AutoSavestateMaker
                     _lastSavestate = DateTime.Now;
                     _extraWaitTime = 0;
 
-                    if (status_PictureBox.BackColor == Color.LightGreen) status_PictureBox.BackColor = Color.PaleGreen;
+                    if (status_PictureBox.BackColor == RunningAndLoadedColor) status_PictureBox.BackColor = RunningColor;
                     lastCreatedSlot_Label.Text = _currentSaveSlot.ToString();
                 }
             }
