@@ -26,8 +26,9 @@ The program makes savestates every few seconds to make long, failable challenges
 - Pick your options, then hit run at the top-left.
 - (*Important*) Savestates will only be made when Project64 is focused. This is so that you can easily do other things while the program is running. The "focus game with A" option make this easier to manage.
 - Use the left and right arrows to change the current save slot.
-- Use "Load" or the numbered buttons to load savestates.
-- Use "Save" to manually create a savestate. (Probably most useful when the program isn't running.)
+- Use the numbered buttons to load savestates in those slots.
+- Use "Load" to load the current savestate slot.
+- Use "Save" to manually create a savestate in the current slot.
 
 ----------
 ### Options
