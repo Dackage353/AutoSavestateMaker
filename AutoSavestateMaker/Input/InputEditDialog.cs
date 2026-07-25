@@ -13,12 +13,12 @@ namespace AutoSavestateMaker.Input
             _inputHandler = inputHandler;
             _inputHandler.InEditMode = true;
 
-            focusGameHotkeyValue_Label.Text = Config.Instance.FocusGame.ToString();
-            startStopHotkeyValue_Label.Text = Config.Instance.StartStop.ToString();
-            loadSavestateHotkeyValue_Label.Text = Config.Instance.LoadSavestate.ToString();
-            slotLeftHotkeyValue_Label.Text = Config.Instance.SlotLeft.ToString();
-            slotRightHotkeyValue_Label.Text = Config.Instance.SlotRight.ToString();
-            shiftHotkeyValue_Label.Text = Config.Instance.Shift.ToString();
+            focusGameHotkeyValue_Label.Text = Config.Instance.FocusGameInput.ToString();
+            startStopHotkeyValue_Label.Text = Config.Instance.StartStopInput.ToString();
+            loadSavestateHotkeyValue_Label.Text = Config.Instance.LoadSavestateInput.ToString();
+            slotLeftHotkeyValue_Label.Text = Config.Instance.SlotLeftInput.ToString();
+            slotRightHotkeyValue_Label.Text = Config.Instance.SlotRightInput.ToString();
+            shiftHotkeyValue_Label.Text = Config.Instance.ShiftInput.ToString();
 
             FormClosed += (a, b) =>
             {
@@ -35,8 +35,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.FocusGame = GetInputInfo(e);
-                    focusGameHotkeyValue_Label.Text = Config.Instance.FocusGame.ToString();
+                    Config.Instance.FocusGameInput = GetInputInfo(e);
+                    focusGameHotkeyValue_Label.Text = Config.Instance.FocusGameInput.ToString();
                     return true;
                 }
 
@@ -52,8 +52,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.StartStop = GetInputInfo(e);
-                    startStopHotkeyValue_Label.Text = Config.Instance.StartStop.ToString();
+                    Config.Instance.StartStopInput = GetInputInfo(e);
+                    startStopHotkeyValue_Label.Text = Config.Instance.StartStopInput.ToString();
                     return true;
                 }
 
@@ -69,8 +69,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.LoadSavestate = GetInputInfo(e);
-                    loadSavestateHotkeyValue_Label.Text = Config.Instance.LoadSavestate.ToString();
+                    Config.Instance.LoadSavestateInput = GetInputInfo(e);
+                    loadSavestateHotkeyValue_Label.Text = Config.Instance.LoadSavestateInput.ToString();
                     return true;
                 }
 
@@ -86,8 +86,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.SlotLeft = GetInputInfo(e);
-                    slotLeftHotkeyValue_Label.Text = Config.Instance.SlotLeft.ToString();
+                    Config.Instance.SlotLeftInput = GetInputInfo(e);
+                    slotLeftHotkeyValue_Label.Text = Config.Instance.SlotLeftInput.ToString();
                     return true;
                 }
 
@@ -103,8 +103,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.SlotRight = GetInputInfo(e);
-                    slotRightHotkeyValue_Label.Text = Config.Instance.SlotRight.ToString();
+                    Config.Instance.SlotRightInput = GetInputInfo(e);
+                    slotRightHotkeyValue_Label.Text = Config.Instance.SlotRightInput.ToString();
                     return true;
                 }
 
@@ -120,8 +120,8 @@ namespace AutoSavestateMaker.Input
             {
                 if (IsValidEvent(e))
                 {
-                    Config.Instance.Shift = GetInputInfo(e);
-                    shiftHotkeyValue_Label.Text = Config.Instance.Shift.ToString();
+                    Config.Instance.ShiftInput = GetInputInfo(e);
+                    shiftHotkeyValue_Label.Text = Config.Instance.ShiftInput.ToString();
                     return true;
                 }
 
