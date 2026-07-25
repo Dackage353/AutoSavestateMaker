@@ -255,7 +255,7 @@
             MaximizeBox = false;
             MinimizeBox = false;
             Name = "InputEditDialog";
-            Text = "Button Test";
+            Text = "Controller Edit";
             ResumeLayout(false);
             PerformLayout();
         }
