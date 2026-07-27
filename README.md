@@ -24,7 +24,7 @@ The program makes savestates every few seconds to make long, failable challenges
 ----------
 ### Usage
 - Pick your options, then hit run at the top-left.
-- (*Important*) Savestates will only be made when Project64 is focused. This is so that you can easily do other things while the program is running. The "focus game with A" option make this easier to manage.
+- (*Important*) Savestates will only be made when Project64 is focused. This is so that you can easily do other things while the program is running. The "Focus game with A" option makes this easier to manage.
 - Use the left and right arrows to change the current save slot.
 - Use the numbered buttons to load savestates in those slots.
 - Use "Load" to load the current savestate slot.
@@ -35,9 +35,9 @@ The program makes savestates every few seconds to make long, failable challenges
 - Interval: How often savestates are made in seconds.
 - Savestates: The number of savestate slots. Up to 80 are supported.
 - Focus game with A: Pulls back focus to Project64 when A is pressed. (This is highly recommended since savestates will only be made while the game is focused)
-- Hotkeys: Toggle controller hotkeys. See the "Edit" menu for the list. (Note that "Focus game with A" works without this setting on.)
+- Hotkeys: Turns on controller hotkeys. See the "Edit" menu for the list. (Note that "Focus game with A" works without this setting on.)
 - Require shift: Hotkeys will now require a shift hotkey to function. Pick the shift hotkey in the "Edit" menu.
 
 #### Hidden Config Options
-- "rewindAtLeastBySeconds": this handles whether to rewind by an extra slot. Sometimes a savestate is created a moment before you die, so this helps rewind to a point where you are more likely to be safe. Some low value of 2-4 is recommended.
-- "extraDelaySecondsOnLoad": this delays the next interval when you load a savestate or manually change slots. This gives you more time to repeatedly load a savestate to get safe before the interval takes over again. Not needed if your interval is high.
+- "rewindAtLeastBySeconds": This handles whether to rewind by an extra slot. Sometimes a savestate is created a moment before you die, so this helps rewind to a point where you are more likely to be safe. Some low value of 2-4 is recommended.
+- "extraDelaySecondsOnLoad": This delays the next interval when you load a savestate or manually change slots. This gives you more time to repeatedly load a savestate to get safe before the interval takes over again. Not needed if your interval is high.
