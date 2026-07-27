@@ -36,11 +36,26 @@ namespace AutoSavestateMaker
             _inputHandler.RefreshControllers();
             controllerList_ComboBox.Items.AddRange(_inputHandler.GetJoystickNames());
 
-            _inputHandler.StartStopButtonAction = () => StopOrStart();
-            _inputHandler.LoadSavestateButtonAction = () => LoadCurrent();
-            _inputHandler.SlotLeftButtonAction = () => DecreaseSlot();
-            _inputHandler.SlotRightButtonAction = () => IncreaseSlot();
             _inputHandler.FocusGameAction = () => FocusWindow();
+            _inputHandler.StartStopButtonAction = () => StopOrStart();
+
+            _inputHandler.LoadSavestateButtonAction = () =>
+            {
+                LoadCurrent();
+                DelayIntervalOnUserAction();
+            };
+
+            _inputHandler.SlotLeftButtonAction = () =>
+            {
+                DecreaseSlot();
+                DelayIntervalOnUserAction();
+            };
+
+            _inputHandler.SlotRightButtonAction = () =>
+            {
+                IncreaseSlot();
+                DelayIntervalOnUserAction();
+            };
 
             _savestateTimer.Tick += (sender, e) =>
             {
@@ -205,20 +220,23 @@ namespace AutoSavestateMaker
 
                 SendKeys.Send(GetKeyWithModifier(slot));
                 SendKeys.Send(hotkey);
-
-                if (run_CheckBox.Checked)
-                {
-                    status_PictureBox.BackColor = RunningAndLoadedColor;
-                }
-
-                _lastSavestate = DateTime.Now;
-                _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
             }
             else
             {
                 Stop();
                 Helper.ShowError("Process \"" + Config.Instance.ProcessName + "\" not found");
             }
+        }
+
+        private void DelayIntervalOnUserAction()
+        {
+            if (run_CheckBox.Checked)
+            {
+                status_PictureBox.BackColor = RunningAndLoadedColor;
+            }
+
+            _lastSavestate = DateTime.Now;
+            _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
         }
 
         private string GetKeyWithModifier(int slot)
@@ -269,16 +287,19 @@ namespace AutoSavestateMaker
             int slot = int.Parse(b.Text);
 
             LoadSavestate(slot);
+            DelayIntervalOnUserAction();
         }
 
         private void save_Button_Click(object sender, EventArgs e)
         {
             SaveSavestate(false, true);
+            DelayIntervalOnUserAction();
         }
 
         private void load_Button_Click(object sender, EventArgs e)
         {
             LoadCurrent();
+            DelayIntervalOnUserAction();
         }
 
         private void interval_NumericUpDown_ValueChanged(object sender, EventArgs e)
@@ -319,11 +340,13 @@ namespace AutoSavestateMaker
         private void slotLeft_Button_Click(object sender, EventArgs e)
         {
             DecreaseSlot();
+            DelayIntervalOnUserAction();
         }
 
         private void slotRight_Button_Click(object sender, EventArgs e)
         {
             IncreaseSlot();
+            DelayIntervalOnUserAction();
         }
 
         private void refreshControllerList_Button_Click(object sender, EventArgs e)
