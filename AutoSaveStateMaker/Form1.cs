@@ -114,14 +114,8 @@ namespace AutoSavestateMaker
             {
                 DecreaseSlot();
             }
-
-            if (run_CheckBox.Checked)
-            {
-                status_PictureBox.BackColor = RunningAndLoadedColor;
-            }
-
+            
             LoadSavestate(_currentSaveSlot);
-            _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
         }
 
         private void IncreaseSlot()
@@ -211,9 +205,18 @@ namespace AutoSavestateMaker
 
                 SendKeys.Send(GetKeyWithModifier(slot));
                 SendKeys.Send(hotkey);
+
+                if (run_CheckBox.Checked)
+                {
+                    status_PictureBox.BackColor = RunningAndLoadedColor;
+                }
+
+                _lastSavestate = DateTime.Now;
+                _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
             }
             else
             {
+                Stop();
                 Helper.ShowError("Process \"" + Config.Instance.ProcessName + "\" not found");
             }
         }
