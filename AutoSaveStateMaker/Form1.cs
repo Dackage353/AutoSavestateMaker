@@ -236,7 +236,7 @@ namespace AutoSavestateMaker
             }
 
             _lastSavestate = DateTime.Now;
-            _extraWaitTime = Config.Instance.ExtraPauseSecondsOnLoad;
+            _extraWaitTime = Config.Instance.ExtraDelaySecondsOnLoad;
         }
 
         private string GetKeyWithModifier(int slot)

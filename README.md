@@ -1,4 +1,4 @@
-# AutoSavestateMaker
+# Auto Savestate Maker
 
 After being constantly frustrated by having to restart long segments I was practicing, I had the idea for a program that would create savestates for me. Now that I've finally developed it enough, I'm ready to share it.
 
@@ -38,6 +38,6 @@ The program makes savestates every few seconds to make long, failable challenges
 - Hotkeys: Toggle controller hotkeys. See the "Edit" menu for the list. (Note that "Focus game with A" works without this setting on.)
 - Require shift: Hotkeys will now require a shift hotkey to function. Pick the shift hotkey in the "Edit" menu.
 
-#### Hidden config Options
+#### Hidden Config Options
 - "rewindAtLeastBySeconds": this handles whether to rewind by an extra slot. Sometimes a savestate is created a moment before you die, so this helps rewind to a point where you are more likely to be safe. Some low value of 2-4 is recommended.
-- "extraPauseSecondsOnLoad": this delays the next interval when you load a savestate. If you are repeatedly loading savestates to get safety, this helps prevent the interval from creating another savestate too soon.
+- "extraDelaySecondsOnLoad": this delays the next interval when you load a savestate or manually change slots. This gives you more time to repeatedly load a savestate to get safe before the interval takes over again. Not needed if your interval is high.

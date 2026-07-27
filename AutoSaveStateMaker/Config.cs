@@ -77,7 +77,7 @@ namespace AutoSavestateMaker
                 field = value < 0 ? 0 : value;
             }
         } = 3;
-        public int ExtraPauseSecondsOnLoad
+        public int ExtraDelaySecondsOnLoad
         {
             get;
             set
